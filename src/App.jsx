@@ -2,6 +2,7 @@ import { useState, useEffect, Fragment } from 'react';
 import CircularText from './CircularText';
 import ClickSpark from './ClickSpark';
 import ElectricBorder from './ElectricBorder';
+import BorderGlow from './BorderGlow';
 import { supabase, isSupabaseConfigured } from './supabaseClient';
 
 // Seeding standard data
@@ -1087,69 +1088,81 @@ function App() {
             </div>
 
             {/* Review Form Card */}
-            <div className="review-form-card glass-panel">
-              {!currentUser ? (
-                // State: Logged Out
-                <div className="auth-required-panel">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lock-icon" style={{width:48, height:48}}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                  </svg>
-                  <h3>Leave a Review</h3>
-                  <p>Sign in or Sign up to write a review for Ishmeet's projects or portfolio.</p>
-                  <button className="btn btn-primary" onClick={() => { setAuthTab('login'); setAuthModalOpen(true); }}>Sign In / Sign Up</button>
-                </div>
-              ) : (
-                // State: Logged In
-                <div className="review-form-panel">
-                  <div className="user-greeting">
-                    <span>Logged in as <strong>{currentUser.username}</strong></span>
-                    <button className="btn-link" onClick={handleSignOutSubmit}>Sign Out</button>
+            {/* Review Form Card */}
+            <BorderGlow
+              edgeSensitivity={35}
+              glowColor={theme === 'dark' ? "0 0 100" : "0 0 0"}
+              backgroundColor="var(--bg-secondary)"
+              borderRadius={20}
+              glowRadius={30}
+              glowIntensity={theme === 'dark' ? 0.8 : 0.4}
+              colors={theme === 'dark' ? ['#ffffff', '#cbd5e1', '#64748b'] : ['#000000', '#334155', '#475569']}
+              fillOpacity={0.05}
+            >
+              <div style={{ padding: '2.5rem', width: '100%', height: '100%' }}>
+                {!currentUser ? (
+                  // State: Logged Out
+                  <div className="auth-required-panel">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="lock-icon" style={{width:48, height:48}}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                    </svg>
+                    <h3>Leave a Review</h3>
+                    <p>Sign in or Sign up to write a review for Ishmeet's projects or portfolio.</p>
+                    <button className="btn btn-primary" onClick={() => { setAuthTab('login'); setAuthModalOpen(true); }}>Sign In / Sign Up</button>
                   </div>
-                  <form onSubmit={handleReviewSubmit}>
-                    <div className="form-group">
-                      <label htmlFor="review-target">What are you reviewing?</label>
-                      <select id="review-target" value={reviewTarget} onChange={(e) => setReviewTarget(e.target.value)} required>
-                        <option value="Overall Portfolio">Overall Portfolio / Ishmeet</option>
-                        {projects.map(p => (
-                          <option key={p.id} value={p.name}>{p.name} Website</option>
-                        ))}
-                      </select>
+                ) : (
+                  // State: Logged In
+                  <div className="review-form-panel">
+                    <div className="user-greeting">
+                      <span>Logged in as <strong>{currentUser.username}</strong></span>
+                      <button className="btn-link" onClick={handleSignOutSubmit}>Sign Out</button>
                     </div>
-                    <div className="form-group">
-                      <label>Your Rating</label>
-                      <div className="rating-input-stars">
-                        {[5, 4, 3, 2, 1].map((val) => (
-                          <Fragment key={val}>
-                            <input 
-                              type="radio" 
-                              id={`star${val}`} 
-                              name="user-rating" 
-                              value={val} 
-                              checked={reviewRating === val}
-                              onChange={() => setReviewRating(val)}
-                              required 
-                            />
-                            <label htmlFor={`star${val}`} title={`${val} stars`}>★</label>
-                          </Fragment>
-                        ))}
+                    <form onSubmit={handleReviewSubmit}>
+                      <div className="form-group">
+                        <label htmlFor="review-target">What are you reviewing?</label>
+                        <select id="review-target" value={reviewTarget} onChange={(e) => setReviewTarget(e.target.value)} required>
+                          <option value="Overall Portfolio">Overall Portfolio / Ishmeet</option>
+                          {projects.map(p => (
+                            <option key={p.id} value={p.name}>{p.name} Website</option>
+                          ))}
+                        </select>
                       </div>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="review-comment">Review Content</label>
-                      <textarea 
-                        id="review-comment" 
-                        value={reviewComment} 
-                        onChange={(e) => setReviewComment(e.target.value)}
-                        placeholder="Write your review here. What did you think about the design, speed, and usability?" 
-                        rows="4" 
-                        required
-                      ></textarea>
-                    </div>
-                    <button type="submit" className="btn btn-primary btn-full-width">Submit Review</button>
-                  </form>
-                </div>
-              )}
-            </div>
+                      <div className="form-group">
+                        <label>Your Rating</label>
+                        <div className="rating-input-stars">
+                          {[5, 4, 3, 2, 1].map((val) => (
+                            <Fragment key={val}>
+                              <input 
+                                type="radio" 
+                                id={`star${val}`} 
+                                name="user-rating" 
+                                value={val} 
+                                checked={reviewRating === val}
+                                onChange={() => setReviewRating(val)}
+                                required 
+                              />
+                              <label htmlFor={`star${val}`} title={`${val} stars`}>★</label>
+                            </Fragment>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="review-comment">Review Content</label>
+                        <textarea 
+                          id="review-comment" 
+                          value={reviewComment} 
+                          onChange={(e) => setReviewComment(e.target.value)}
+                          placeholder="Write your review here. What did you think about the design, speed, and usability?" 
+                          rows="4" 
+                          required
+                        ></textarea>
+                      </div>
+                      <button type="submit" className="btn btn-primary btn-full-width">Submit Review</button>
+                    </form>
+                  </div>
+                )}
+              </div>
+            </BorderGlow>
 
             {/* Reviews Grid */}
             <div className="reviews-list-container">
@@ -1157,20 +1170,32 @@ function App() {
                 <p style={{gridColumn:'span 2', textAlign:'center', color:'var(--text-muted)', fontStyle:'italic'}}>No reviews yet. Be the first to write one!</p>
               ) : (
                 reviews.map((rev) => (
-                  <div className="review-item" key={rev.id}>
-                    <div className="review-header-info">
-                      <div className="reviewer-user">
-                        <div className="reviewer-avatar">{rev.avatarLetter}</div>
-                        <div>
-                          <span className="reviewer-name">{rev.name}</span>
-                          <div className="review-target-badge">{rev.target}</div>
+                  <BorderGlow
+                    key={rev.id}
+                    edgeSensitivity={35}
+                    glowColor={theme === 'dark' ? "0 0 100" : "0 0 0"}
+                    backgroundColor="var(--bg-secondary)"
+                    borderRadius={16}
+                    glowRadius={25}
+                    glowIntensity={theme === 'dark' ? 0.8 : 0.4}
+                    colors={theme === 'dark' ? ['#ffffff', '#cbd5e1', '#64748b'] : ['#000000', '#334155', '#475569']}
+                    fillOpacity={0.05}
+                  >
+                    <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', width: '100%', height: '100%' }}>
+                      <div className="review-header-info">
+                        <div className="reviewer-user">
+                          <div className="reviewer-avatar">{rev.avatarLetter}</div>
+                          <div>
+                            <span className="reviewer-name">{rev.name}</span>
+                            <div className="review-target-badge">{rev.target}</div>
+                          </div>
                         </div>
+                        <div className="review-item-stars" style={{color:'#fbbf24'}}>{getStarsHTML(rev.rating)}</div>
                       </div>
-                      <div className="review-item-stars" style={{color:'#fbbf24'}}>{getStarsHTML(rev.rating)}</div>
+                      <p className="review-comment" style={{ flex: 1 }}>"{rev.comment}"</p>
+                      <span className="review-date" style={{ alignSelf: 'flex-end', marginTop: '1rem' }}>{rev.date}</span>
                     </div>
-                    <p className="review-comment">"{rev.comment}"</p>
-                    <span className="review-date">{rev.date}</span>
-                  </div>
+                  </BorderGlow>
                 ))
               )}
             </div>
