@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import CircularText from './CircularText';
 import ClickSpark from './ClickSpark';
 import ElectricBorder from './ElectricBorder';
@@ -817,12 +817,13 @@ function App() {
           </nav>
           <div className="nav-actions">
             <button id="theme-toggle" className="btn-icon" onClick={toggleTheme} aria-label="Toggle dark/light theme">
-              {theme === 'light' ? (
-                <svg className="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{display:'block'}}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m0 13.5V21M9.75 15.75H4.25m15.5 0h-5.5m-.75-9.75-3.5 3.5m7 0-3.5-3.5M6.75 6.75l3.5 3.5m0 7-3.5 3.5M12 5.25a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5Z" />
+              {theme === 'dark' ? (
+                <svg className="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{width: 24, height: 24, display:'block'}}>
+                  <circle cx="12" cy="12" r="4" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
                 </svg>
               ) : (
-                <svg className="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{display:'block'}}>
+                <svg className="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" style={{width: 24, height: 24, display:'block'}}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
                 </svg>
               )}
@@ -1118,7 +1119,7 @@ function App() {
                       <label>Your Rating</label>
                       <div className="rating-input-stars">
                         {[5, 4, 3, 2, 1].map((val) => (
-                          <span key={val}>
+                          <Fragment key={val}>
                             <input 
                               type="radio" 
                               id={`star${val}`} 
@@ -1129,7 +1130,7 @@ function App() {
                               required 
                             />
                             <label htmlFor={`star${val}`} title={`${val} stars`}>★</label>
-                          </span>
+                          </Fragment>
                         ))}
                       </div>
                     </div>
