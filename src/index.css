@@ -252,9 +252,7 @@ a {
     left: 0;
     width: 100%;
     z-index: 100;
-    background: var(--bg-glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: var(--bg-primary);
     border-bottom: 1px solid var(--border-color);
     transition: background-color var(--transition-speed);
 }
