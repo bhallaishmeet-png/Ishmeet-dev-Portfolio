@@ -131,8 +131,8 @@ ishmeet-portfolio/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/ishmeet-portfolio.git
-cd ishmeet-portfolio
+git clone https://github.com/bhallaishmeet-png/Ishmeet-dev-Portfolio.git
+cd Ishmeet-dev-Portfolio
 ```
 
 ### 2. Install Dependencies
@@ -168,6 +168,15 @@ To access the administrator CMS:
    - **Email**: `bhallaishmeet@gmail.com` *(or `admin@ishmeet.dev`)*
    - **Password**: `admin`
 3. Credentials can be customized inside **Site Settings** in the CMS.
+
+---
+
+## 🌐 Connect & Socials
+
+- 💼 **LinkedIn**: [ishmeet-bhalla-053443390](https://www.linkedin.com/in/ishmeet-bhalla-053443390/)
+- 💻 **GitHub**: [@bhallaishmeet-png](https://github.com/bhallaishmeet-png)
+- 📸 **Instagram**: [@ishmeet.bhalla2011](https://www.instagram.com/ishmeet.bhalla2011/)
+- 🎥 **YouTube**: [@ishmeetbhalla7009](https://www.youtube.com/@ishmeetbhalla7009)
 
 ---
 

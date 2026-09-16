@@ -1,6 +1,7 @@
 import { ArrowUp, Lock } from 'lucide-react';
+import { GithubIcon, LinkedinIcon, YoutubeIcon, InstagramIcon } from '../common/BrandIcons';
 
-export default function Footer({ onOpenResume }) {
+export default function Footer({ settings, onOpenResume }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -44,7 +45,63 @@ export default function Footer({ onOpenResume }) {
           </p>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '18px', flexWrap: 'wrap' }}>
+          {/* Social Links */}
+          {settings?.githubUrl && (
+            <a
+              href={settings.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              title="GitHub Profile"
+              style={{ color: 'var(--bone-dim)', display: 'flex', alignItems: 'center', transition: 'color 0.2s' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--bone-dim)')}
+            >
+              <GithubIcon size={16} />
+            </a>
+          )}
+          {settings?.linkedinUrl && (
+            <a
+              href={settings.linkedinUrl}
+              target="_blank"
+              rel="noreferrer"
+              title="LinkedIn Profile"
+              style={{ color: 'var(--bone-dim)', display: 'flex', alignItems: 'center', transition: 'color 0.2s' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#0a66c2')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--bone-dim)')}
+            >
+              <LinkedinIcon size={16} />
+            </a>
+          )}
+          {settings?.youtubeUrl && (
+            <a
+              href={settings.youtubeUrl}
+              target="_blank"
+              rel="noreferrer"
+              title="YouTube Channel"
+              style={{ color: 'var(--bone-dim)', display: 'flex', alignItems: 'center', transition: 'color 0.2s' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#ff0000')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--bone-dim)')}
+            >
+              <YoutubeIcon size={16} />
+            </a>
+          )}
+          {settings?.instagramUrl && (
+            <a
+              href={settings.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              title="Instagram Profile"
+              style={{ color: 'var(--bone-dim)', display: 'flex', alignItems: 'center', transition: 'color 0.2s' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#e1306c')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--bone-dim)')}
+            >
+              <InstagramIcon size={16} />
+            </a>
+          )}
+
+          <span style={{ width: '1px', height: '16px', backgroundColor: 'rgba(223, 231, 224, 0.12)' }} />
+
           <button
             onClick={onOpenResume}
             style={{

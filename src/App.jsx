@@ -333,7 +333,7 @@ export default function App() {
       </main>
 
       {/* 5. Minimal Editorial Footer */}
-      <Footer onOpenResume={() => setResumeOpen(true)} />
+      <Footer settings={settings} onOpenResume={() => setResumeOpen(true)} />
 
       {/* 6. Deep Dive Project Case Study Modal */}
       {selectedProject && (

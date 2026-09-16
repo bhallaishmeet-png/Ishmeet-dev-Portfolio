@@ -16,7 +16,7 @@ const STORAGE_KEYS = {
   SKILLS: 'ishmeet_skills_v4',
   JOURNEY: 'ishmeet_journey_v4',
   MUSIC: 'ishmeet_music_v4',
-  SETTINGS: 'ishmeet_settings_v4',
+  SETTINGS: 'ishmeet_settings_v5',
   MESSAGES: 'ishmeet_messages_v4',
   MEDIA: 'ishmeet_media_v4'
 };
@@ -320,10 +320,10 @@ export const DEFAULT_SETTINGS = {
   interestsText: "Science • Technology • Entrepreneurship • Music • Reading",
   futureGoal: "To become an entrepreneur in science and education by creating innovative STEM learning solutions.",
   email: "bhallaishmeet@gmail.com",
-  githubUrl: "https://github.com/ishmeetbhalla",
-  linkedinUrl: "https://linkedin.com/in/ishmeetbhalla",
-  youtubeUrl: "https://youtube.com/@ishmeetbhalla",
-  instagramUrl: "https://instagram.com/ishmeetbhalla",
+  githubUrl: "https://github.com/bhallaishmeet-png",
+  linkedinUrl: "https://www.linkedin.com/in/ishmeet-bhalla-053443390/",
+  youtubeUrl: "https://www.youtube.com/@ishmeetbhalla7009",
+  instagramUrl: "https://www.instagram.com/ishmeet.bhalla2011/",
   resumeUrl: "/assets/Ishmeet_Bhalla_Resume.pdf",
   seoTitle: "Ishmeet Bhalla — Student, Builder & Author",
   seoDescription: "Portfolio of Ishmeet Bhalla. Class 10 student at Holy Child Public School exploring science, technology, entrepreneurship, music, and writing.",
@@ -541,7 +541,25 @@ export async function getMusic() {
 
 // SETTINGS
 export async function getSettings() {
-  return getLocal(STORAGE_KEYS.SETTINGS, DEFAULT_SETTINGS);
+  const current = getLocal(STORAGE_KEYS.SETTINGS, DEFAULT_SETTINGS);
+  if (
+    current &&
+    (current.githubUrl !== "https://github.com/bhallaishmeet-png" ||
+     current.linkedinUrl !== "https://www.linkedin.com/in/ishmeet-bhalla-053443390/" ||
+     current.instagramUrl !== "https://www.instagram.com/ishmeet.bhalla2011/" ||
+     current.youtubeUrl !== "https://www.youtube.com/@ishmeetbhalla7009")
+  ) {
+    const updated = {
+      ...current,
+      githubUrl: "https://github.com/bhallaishmeet-png",
+      linkedinUrl: "https://www.linkedin.com/in/ishmeet-bhalla-053443390/",
+      instagramUrl: "https://www.instagram.com/ishmeet.bhalla2011/",
+      youtubeUrl: "https://www.youtube.com/@ishmeetbhalla7009"
+    };
+    setLocal(STORAGE_KEYS.SETTINGS, updated);
+    return updated;
+  }
+  return current;
 }
 
 export async function saveSettings(settings) {
