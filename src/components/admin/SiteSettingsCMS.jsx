@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Save, Lock, Globe, Share2 } from 'lucide-react';
+import { Save, Lock, Globe, Share2, Image as ImageIcon, Upload, RotateCcw } from 'lucide-react';
 import { saveSettings } from '../../services/database';
 import { updateAdminPassword } from '../../services/auth';
 
@@ -14,6 +14,26 @@ export default function SiteSettingsCMS({ settings, onSettingsUpdated, onTrigger
       setFormData({ ...settings });
     }
   }, [settings]);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert("Please select an image smaller than 5MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const dataUrl = event.target?.result;
+      if (dataUrl) {
+        setFormData(prev => ({ ...prev, profileImage: dataUrl }));
+        onTriggerToast?.("New portrait image loaded. Click 'Save Settings' to apply.");
+      }
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleSettingsSubmit = async (e) => {
     e.preventDefault();
@@ -60,6 +80,102 @@ export default function SiteSettingsCMS({ settings, onSettingsUpdated, onTrigger
 
       {/* SEO & Meta Settings */}
       <form onSubmit={handleSettingsSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        {/* Profile Picture / Portrait Management */}
+        <div
+          style={{
+            backgroundColor: 'var(--ink-2)',
+            border: '1px solid rgba(223, 231, 224, 0.08)',
+            borderRadius: 'var(--radius-md)',
+            padding: '24px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--vermilion)', marginBottom: '4px' }}>
+            <ImageIcon size={16} />
+            <h3 style={{ fontSize: '14px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.08em', margin: 0 }}>
+              Profile Portrait Photo
+            </h3>
+          </div>
+
+          <div style={{ display: 'flex', gap: '24px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <div
+              style={{
+                width: '120px',
+                height: '150px',
+                borderRadius: 'var(--radius-sm)',
+                overflow: 'hidden',
+                border: '1px solid rgba(223, 231, 224, 0.15)',
+                backgroundColor: 'var(--ink-3)',
+                flexShrink: 0
+              }}
+            >
+              <img
+                src={formData.profileImage || "/assets/real_photo.jpg"}
+                alt="Profile Preview"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', flex: 1, minWidth: '240px' }}>
+              <div>
+                <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)', marginBottom: '6px' }}>
+                  Upload New Photo from Computer
+                </label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <label
+                    className="btn-secondary"
+                    style={{
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '8px 16px',
+                      fontSize: '12px'
+                    }}
+                  >
+                    <Upload size={14} />
+                    <span>Choose Image File</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      style={{ display: 'none' }}
+                    />
+                  </label>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData(prev => ({ ...prev, profileImage: "/assets/real_photo.jpg" }));
+                      onTriggerToast?.("Reset to default portrait.");
+                    }}
+                    className="btn-secondary"
+                    style={{ fontSize: '12px', padding: '8px 14px', gap: '6px' }}
+                  >
+                    <RotateCcw size={13} />
+                    <span>Reset Default</span>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label style={{ display: 'block', fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--muted)', marginBottom: '6px' }}>
+                  Or Direct Image URL / Local Asset Path
+                </label>
+                <input
+                  type="text"
+                  value={formData.profileImage || ''}
+                  onChange={(e) => setFormData({ ...formData, profileImage: e.target.value })}
+                  placeholder="/assets/real_photo.jpg or https://..."
+                  className="input-field"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div
           style={{
             backgroundColor: 'var(--ink-2)',

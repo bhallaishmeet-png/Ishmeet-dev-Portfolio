@@ -77,7 +77,7 @@ export default function Books({ books, setBooks }) {
         <div>
           <div className="eyebrow" style={{ marginBottom: '12px' }}>
             <span className="dot" />
-            <span>CHAPTER 03 · PUBLISHED AUTHOR &amp; BOOKS</span>
+            <span>CHAPTER 05 · PUBLISHED AUTHOR &amp; BOOKS</span>
           </div>
           <h2
             className="display-title"

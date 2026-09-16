@@ -16,7 +16,7 @@ export default function Achievements({ achievements, onOpenResume }) {
       <div style={{ marginBottom: '56px' }}>
         <div className="eyebrow" style={{ marginBottom: '12px' }}>
           <span className="dot" />
-          <span>CHAPTER 07 · HONORS &amp; SCIENTIFIC MERIT</span>
+          <span>CHAPTER 06 · HONORS &amp; SCIENTIFIC MERIT</span>
         </div>
         <h2
           className="display-title"

@@ -67,7 +67,7 @@ export default function Projects({ projects, onSelectProject, setProjects }) {
       <div style={{ marginBottom: '48px', display: 'flex', flexDirection: 'column' }}>
         <div className="eyebrow" style={{ marginBottom: '12px' }}>
           <span className="dot" />
-          <span>CHAPTER 02 · VERIFIED CREATIONS &amp; PLATFORMS</span>
+          <span>CHAPTER 03 · VERIFIED CREATIONS &amp; PLATFORMS</span>
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: '20px' }}>
           <div>

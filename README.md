@@ -163,11 +163,9 @@ Spawns the local production preview server (default: [http://localhost:4173](htt
 ## 🔐 Admin Access
 
 To access the administrator CMS:
-1. Navigate to `#/admin` on your running port (e.g., [http://localhost:5173/#/admin](http://localhost:5173/#/admin)) or click the **Lock icon** in the top navigation bar.
-2. Enter the default administrator credentials:
-   - **Email**: `bhallaishmeet@gmail.com` *(or `admin@ishmeet.dev`)*
-   - **Password**: `admin`
-3. Credentials can be customized inside **Site Settings** in the CMS.
+1. Navigate to `#/admin` on your running port (e.g., [http://localhost:5174/#/admin](http://localhost:5174/#/admin)) or click the **Lock icon** in the top navigation bar.
+2. Sign in using your private administrator credentials.
+3. Master password and configuration can be managed securely inside the **Site Settings** panel.
 
 ---
 

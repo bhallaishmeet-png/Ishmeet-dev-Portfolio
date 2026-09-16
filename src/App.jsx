@@ -7,7 +7,6 @@ import {
   getAchievements,
   getSkills,
   getJourney,
-  getMusic,
   getSettings,
   getMessages
 } from './services/database';
@@ -26,7 +25,6 @@ import Projects from './components/public/Projects';
 import ProjectModal from './components/public/ProjectModal';
 import Journey from './components/public/Journey';
 import Books from './components/public/Books';
-import MusicStudio from './components/public/MusicStudio';
 import Achievements from './components/public/Achievements';
 import FutureVision from './components/public/FutureVision';
 import Contact from './components/public/Contact';
@@ -42,7 +40,6 @@ import ProjectsCMS from './components/admin/ProjectsCMS';
 import BooksCMS from './components/admin/BooksCMS';
 import AchievementsCMS from './components/admin/AchievementsCMS';
 import SkillsCMS from './components/admin/SkillsCMS';
-import MusicCMS from './components/admin/MusicCMS';
 import JourneyCMS from './components/admin/JourneyCMS';
 import ContentCMS from './components/admin/ContentCMS';
 import MessagesInbox from './components/admin/MessagesInbox';
@@ -60,7 +57,6 @@ export default function App() {
   const [achievements, setAchievements] = useState([]);
   const [skills, setSkills] = useState([]);
   const [journey, setJourney] = useState([]);
-  const [music, setMusic] = useState([]);
   const [settings, setSettings] = useState(null);
   const [messages, setMessages] = useState([]);
 
@@ -102,7 +98,6 @@ export default function App() {
           achsData,
           skillsData,
           journeyData,
-          musicData,
           settingsData,
           msgsData
         ] = await Promise.all([
@@ -111,7 +106,6 @@ export default function App() {
           getAchievements(),
           getSkills(),
           getJourney(),
-          getMusic(),
           getSettings(),
           getMessages()
         ]);
@@ -121,7 +115,6 @@ export default function App() {
         setAchievements(achsData);
         setSkills(skillsData);
         setJourney(journeyData);
-        setMusic(musicData);
         setSettings(settingsData);
         setMessages(msgsData);
 
@@ -221,13 +214,6 @@ export default function App() {
             onTriggerToast={triggerToast}
           />
         )}
-        {adminTab === 'music' && (
-          <MusicCMS
-            music={music}
-            onMusicUpdated={setMusic}
-            onTriggerToast={triggerToast}
-          />
-        )}
         {adminTab === 'journey' && (
           <JourneyCMS
             journey={journey}
@@ -306,13 +292,10 @@ export default function App() {
         {/* Chapter 05: Books & Writing */}
         <Books books={books} setBooks={setBooks} />
 
-        {/* Chapter 06: Music Studio & Instrumentation */}
-        <MusicStudio musicTracks={music} />
-
-        {/* Chapter 07: Honors & Achievements */}
+        {/* Chapter 06: Honors & Achievements */}
         <Achievements achievements={achievements} onOpenResume={() => setResumeOpen(true)} />
 
-        {/* Chapter 08: Future Vision */}
+        {/* Chapter 07: Future Vision */}
         <FutureVision
           visionText={settings?.futureVision}
           onContactClick={() => {
@@ -321,7 +304,7 @@ export default function App() {
           }}
         />
 
-        {/* Chapter 09: Contact & Collaboration */}
+        {/* Chapter 08: Contact & Collaboration */}
         <Contact
           settings={settings}
           onMessageSubmitted={() => {

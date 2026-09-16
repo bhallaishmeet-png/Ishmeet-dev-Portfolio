@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Award, BookOpen, GraduationCap, Compass, ArrowRight, Target, CheckCircle2 } from 'lucide-react';
 
-export default function About({ onOpenResume }) {
-  const [photoHovered, setPhotoHovered] = useState(false);
+export default function About({ settings, onOpenResume }) {
+  const profileImg = settings?.profileImage || "/assets/real_photo.jpg";
 
   const skillsList = [
     'Communication',
@@ -227,22 +227,17 @@ export default function About({ onOpenResume }) {
               overflow: 'hidden',
               border: '1px solid rgba(223, 231, 224, 0.12)',
               backgroundColor: 'var(--ink-2)',
-              aspectRatio: '4/5',
-              cursor: 'pointer'
+              aspectRatio: '4/5'
             }}
-            onMouseEnter={() => setPhotoHovered(true)}
-            onMouseLeave={() => setPhotoHovered(false)}
           >
             <img
-              src={photoHovered ? "/assets/doodle_photo_new.jpg" : "/assets/real_photo.jpg"}
+              src={profileImg}
               alt="Ishmeet Bhalla"
               style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                filter: 'grayscale(30%) contrast(1.06)',
-                transition: 'filter 0.5s var(--ease), transform 0.6s var(--ease)',
-                transform: photoHovered ? 'scale(1.03)' : 'scale(1.0)'
+                filter: 'contrast(1.04)'
               }}
             />
 
@@ -257,7 +252,7 @@ export default function About({ onOpenResume }) {
             >
               <div className="eyebrow" style={{ marginBottom: '6px' }}>
                 <span className="dot" />
-                <span>{photoHovered ? "CREATIVE & TECHNICAL EXPLORER" : "ISHMEET BHALLA"}</span>
+                <span>ISHMEET BHALLA</span>
               </div>
               <p style={{ fontSize: '12px', color: 'var(--bone-dim)', margin: 0 }}>
                 Class 10 E2 · Holy Child Public School · Student Builder &amp; Published Author

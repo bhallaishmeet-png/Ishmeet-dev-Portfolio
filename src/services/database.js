@@ -325,6 +325,7 @@ export const DEFAULT_SETTINGS = {
   youtubeUrl: "https://www.youtube.com/@ishmeetbhalla7009",
   instagramUrl: "https://www.instagram.com/ishmeet.bhalla2011/",
   resumeUrl: "/assets/Ishmeet_Bhalla_Resume.pdf",
+  profileImage: "/assets/real_photo.jpg",
   seoTitle: "Ishmeet Bhalla — Student, Builder & Author",
   seoDescription: "Portfolio of Ishmeet Bhalla. Class 10 student at Holy Child Public School exploring science, technology, entrepreneurship, music, and writing.",
   accentColor: "#e0231c",
@@ -542,15 +543,18 @@ export async function getMusic() {
 // SETTINGS
 export async function getSettings() {
   const current = getLocal(STORAGE_KEYS.SETTINGS, DEFAULT_SETTINGS);
+  const merged = { ...DEFAULT_SETTINGS, ...current };
+  
   if (
-    current &&
-    (current.githubUrl !== "https://github.com/bhallaishmeet-png" ||
-     current.linkedinUrl !== "https://www.linkedin.com/in/ishmeet-bhalla-053443390/" ||
-     current.instagramUrl !== "https://www.instagram.com/ishmeet.bhalla2011/" ||
-     current.youtubeUrl !== "https://www.youtube.com/@ishmeetbhalla7009")
+    !current?.profileImage ||
+    current.githubUrl !== "https://github.com/bhallaishmeet-png" ||
+    current.linkedinUrl !== "https://www.linkedin.com/in/ishmeet-bhalla-053443390/" ||
+    current.instagramUrl !== "https://www.instagram.com/ishmeet.bhalla2011/" ||
+    current.youtubeUrl !== "https://www.youtube.com/@ishmeetbhalla7009"
   ) {
     const updated = {
-      ...current,
+      ...merged,
+      profileImage: current?.profileImage || DEFAULT_SETTINGS.profileImage,
       githubUrl: "https://github.com/bhallaishmeet-png",
       linkedinUrl: "https://www.linkedin.com/in/ishmeet-bhalla-053443390/",
       instagramUrl: "https://www.instagram.com/ishmeet.bhalla2011/",
@@ -559,7 +563,7 @@ export async function getSettings() {
     setLocal(STORAGE_KEYS.SETTINGS, updated);
     return updated;
   }
-  return current;
+  return merged;
 }
 
 export async function saveSettings(settings) {

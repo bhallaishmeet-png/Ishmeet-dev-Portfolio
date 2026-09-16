@@ -3,7 +3,7 @@ import { Compass, Sparkles } from 'lucide-react';
 export default function FutureVision() {
   return (
     <section
-      id="vision"
+      id="future-vision"
       style={{
         padding: '100px var(--pad)',
         position: 'relative',
@@ -14,7 +14,7 @@ export default function FutureVision() {
       <div style={{ maxWidth: '860px', margin: '0 auto', textAlign: 'center' }}>
         <div className="eyebrow" style={{ justifyContent: 'center', marginBottom: '16px' }}>
           <span className="dot" />
-          <span>CHAPTER 06 · FUTURE GOAL</span>
+          <span>CHAPTER 07 · FUTURE GOAL</span>
         </div>
 
         <h2

@@ -69,7 +69,7 @@ export default function Contact({ settings, onMessageSubmitted }) {
       <div style={{ marginBottom: '56px' }}>
         <div className="eyebrow" style={{ marginBottom: '12px' }}>
           <span className="dot" />
-          <span>CHAPTER 09 · CONTACT &amp; COLLABORATION</span>
+          <span>CHAPTER 08 · CONTACT &amp; COLLABORATION</span>
         </div>
         <h2
           className="display-title"

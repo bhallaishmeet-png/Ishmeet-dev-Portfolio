@@ -7,10 +7,9 @@ const NAV_LINKS = [
   { label: '03 Projects', href: '#projects' },
   { label: '04 Journey', href: '#journey' },
   { label: '05 Books', href: '#books' },
-  { label: '06 Music', href: '#music' },
-  { label: '07 Honors', href: '#achievements' },
-  { label: '08 Future', href: '#future-vision' },
-  { label: '09 Contact', href: '#contact' }
+  { label: '06 Honors', href: '#achievements' },
+  { label: '07 Future', href: '#future-vision' },
+  { label: '08 Contact', href: '#contact' }
 ];
 
 export default function Navbar({ onOpenResume }) {
